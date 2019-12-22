@@ -29,8 +29,14 @@ describe('AppointmentsDayView', () => {
     let container;
     const today = new Date();
     const appointments = [
-        { startsAt: today.setHours(12,0)},
-        { startsAt: today.setHours(13,0)}
+        { 
+            startsAt: today.setHours(12,0),
+            customer: { firstName: 'Ashley' }
+        },
+        { 
+            startsAt: today.setHours(13,0),
+            customer: { firstName: 'Jordan' }
+        }
     ];
 
     beforeEach(() => {
@@ -57,5 +63,15 @@ describe('AppointmentsDayView', () => {
         expect(container.querySelectorAll('li')).toHaveLength(2);
         expect(container.querySelectorAll('li')[0].textContent).toEqual('12:00');
         expect(container.querySelectorAll('li')[1].textContent).toEqual('13:00');
+    });
+
+    it('initially show a message saying there are no appointments today', () => {
+        render(<AppointmentsDayView appointments={[]} />);
+        expect(container.textContent).toMatch('There are no appointments scheduled for today.');
+    });
+
+    it('selects the first appointment by default', () => {
+        render(<AppointmentsDayView appointments={appointments} />);
+        expect(container.textContent).toMatch('Ashley');
     });
 });
