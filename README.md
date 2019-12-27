@@ -1,2 +1,2 @@
 # react-tdd
-A project to practive test driven development with React
+A project to practice test driven development with React
