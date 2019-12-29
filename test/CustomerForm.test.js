@@ -110,4 +110,11 @@ describe('CustomerForm', () => {
         itSavesNewValueWhenSubmitted('phoneNumber', '9999');
     });
  
+    it('has a submit button', () => {
+        render(<CustomerForm />);
+        const submitButton = container.querySelector(
+            'input[type="submit"]'
+        );
+        expect(submitButton).not.toBeNull();
+    });
 });
