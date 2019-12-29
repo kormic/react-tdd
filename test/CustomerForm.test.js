@@ -12,9 +12,9 @@ describe('CustomerForm', () => {
     const labelFor = formElement => container.querySelector(`label[for="${formElement}"]`);
 
     const expectToBeInputFieldOfTypeText = formElement => {
-        expect(field('firstName')).not.toBeNull();
-        expect(field('firstName').tagName).toEqual('INPUT');
-        expect(field('firstName').type).toEqual('text');
+        expect(formElement).not.toBeNull();
+        expect(formElement.tagName).toEqual('INPUT');
+        expect(formElement.type).toEqual('text');
     };
 
     const itRendersAsATextBox = (fieldName) => 
