@@ -91,4 +91,23 @@ describe('CustomerForm', () => {
         itSavesExistingValueWhenSubmitted('firstName', 'Ashley');
         itSavesNewNameWhenSubmitted('firstName', 'Jamie');
     })
+
+    describe('last name field', () => {
+        itRendersAsATextBox('lastName');
+        itIncludesTheExistingValue('lastName');
+        itRendersALabel('lastName', 'Last name');
+        itAssignsAnIdThatMatchedThelabelIdToTheFieldId('lastName');
+        itSavesExistingValueWhenSubmitted('lastName', 'Wilkinson');
+        itSavesNewNameWhenSubmitted('lastName', 'Ironman');
+    });
+    
+    describe('last name field', () => {
+        itRendersAsATextBox('phoneNumber');
+        itIncludesTheExistingValue('phoneNumber');
+        itRendersALabel('phoneNumber', 'Phone number');
+        itAssignsAnIdThatMatchedThelabelIdToTheFieldId('phoneNumber');
+        itSavesExistingValueWhenSubmitted('phoneNumber', '01234');
+        itSavesNewNameWhenSubmitted('phoneNumber', '9999');
+    });
+ 
 });
