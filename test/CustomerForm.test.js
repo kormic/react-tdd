@@ -55,8 +55,8 @@ describe('CustomerForm', () => {
             await ReactTestUtils.Simulate.submit(form('customer'));
         });
 
-    const itSavesNewNameWhenSubmitted = (fieldName, newName) => 
-        it('saves new first name when submitted', async() => {
+    const itSavesNewValueWhenSubmitted = (fieldName, value) => 
+        it('saves new value when submitted', async() => {
             expect.hasAssertions();
             render(
                 <CustomerForm 
@@ -64,12 +64,12 @@ describe('CustomerForm', () => {
                         ...{ [fieldName]: 'existing value'}
                     }
                     onSubmit={(props) => 
-                        expect(props[fieldName]).toEqual(newName)
+                        expect(props[fieldName]).toEqual(value)
                     }  
                 />
             );
             await ReactTestUtils.Simulate.change(field(fieldName), {
-                target: { value: newName }
+                target: { value: value }
             });
             await ReactTestUtils.Simulate.submit(form('customer'));
         });
@@ -89,7 +89,7 @@ describe('CustomerForm', () => {
         itRendersALabel('firstName', 'First name');
         itAssignsAnIdThatMatchedThelabelIdToTheFieldId('firstName');
         itSavesExistingValueWhenSubmitted('firstName', 'Ashley');
-        itSavesNewNameWhenSubmitted('firstName', 'Jamie');
+        itSavesNewValueWhenSubmitted('firstName', 'Jamie');
     })
 
     describe('last name field', () => {
@@ -98,7 +98,7 @@ describe('CustomerForm', () => {
         itRendersALabel('lastName', 'Last name');
         itAssignsAnIdThatMatchedThelabelIdToTheFieldId('lastName');
         itSavesExistingValueWhenSubmitted('lastName', 'Wilkinson');
-        itSavesNewNameWhenSubmitted('lastName', 'Ironman');
+        itSavesNewValueWhenSubmitted('lastName', 'Ironman');
     });
     
     describe('last name field', () => {
@@ -107,7 +107,7 @@ describe('CustomerForm', () => {
         itRendersALabel('phoneNumber', 'Phone number');
         itAssignsAnIdThatMatchedThelabelIdToTheFieldId('phoneNumber');
         itSavesExistingValueWhenSubmitted('phoneNumber', '01234');
-        itSavesNewNameWhenSubmitted('phoneNumber', '9999');
+        itSavesNewValueWhenSubmitted('phoneNumber', '9999');
     });
  
 });
