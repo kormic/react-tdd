@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactTestUtils from 'react-dom/test-utils';
 import { createContainer } from './domManipulators';
 import { AppointmentForm } from '../src/AppointmentForm';
 
@@ -69,6 +70,46 @@ describe('AppointmentForm', () => {
                 "Blow-dry"
             );
             expect(option.selected).toBeTruthy();
+        });
+
+        it('renders a label', () => {
+            render(<AppointmentForm />);
+            const label = container.querySelector('label[for="service"]');
+            expect(label).not.toBeNull();
+            expect(label.textContent).toEqual('Salon service');
+        });
+
+        it('assigns an ID that matches the label ID', () => {
+            render(<AppointmentForm />);
+            const label = container.querySelector('label[for="service"]');
+            const select = container.querySelector('select[id="service"]');
+            expect(label.id).toEqual(select.id);
+        });
+
+        it('saves the existing value when submitted', async () => {
+            expect.hasAssertions();
+            render(<AppointmentForm 
+                        service="Blow-dry" 
+                        onSubmit={(props) => 
+                            expect(props.service).toEqual('Blow-dry')
+                        }
+                    />);
+
+            await ReactTestUtils.Simulate.submit(form('appointment'));
+        });
+
+        it('saves new value when submitted', async () => {
+            expect.hasAssertions();
+            render(<AppointmentForm
+                        service="Blow-dry"
+                        onSubmit={
+                        (service) =>
+                            expect(service).toEqual('Cut') 
+                        }
+                />);
+            const select = container.querySelector('select[id="service"]');
+            await ReactTestUtils.Simulate.change(select, { value: 'Cut', name: 'service' });
+            await ReactTestUtils.Simulate.submit(form('appointment'));
         });
     });
 });
